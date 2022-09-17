@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LocationInit {
-    @Getter
     private final Map<Integer, Location> locations = new HashMap<>();
 
     public LocationInit() {
@@ -60,5 +59,9 @@ public class LocationInit {
         locations.put(13, nolahmaa);
         locations.put(14, akosia);
         locations.put(15, krismaa);
+    }
+
+    public Location getLocationById(int locationId){
+        return locations.get(locationId);
     }
 }

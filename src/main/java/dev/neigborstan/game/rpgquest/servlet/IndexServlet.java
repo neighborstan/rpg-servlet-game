@@ -20,7 +20,7 @@ public class IndexServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Repository repo = (Repository) req.getServletContext().getAttribute("repository");
-        req.setAttribute("users", repo.getUsers());
+        req.setAttribute("users", repo.getUserInit().getUsers());
 
         getServletContext().getRequestDispatcher("/jsp/index.jsp").forward(req, resp);
     }

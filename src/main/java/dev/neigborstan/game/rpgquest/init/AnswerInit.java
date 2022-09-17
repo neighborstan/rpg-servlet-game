@@ -6,94 +6,95 @@ import dev.neigborstan.game.rpgquest.entity.Question;
 import lombok.Getter;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class AnswerInit {
-    @Getter
     private final Map<Integer, Answer> answers = new HashMap<>();
 
-    public AnswerInit(Map<Integer, Location> locations, Map<Integer, Question> questions) {
+    public AnswerInit(LocationInit locationInit, QuestionInit questionInit) {
 
-        Answer answer1 = new Answer(1, "Приветствовать", questions.get(1), questions.get(3));
-        Answer answer2 = new Answer(2, "Уйти", questions.get(1), questions.get(2));
-        Answer answer3 = new Answer(3, "Некоторые локации закрыты, как быть?", questions.get(4), questions.get(5));
-        Answer answer4 = new Answer(4, "Уйти", questions.get(4), questions.get(2));
-        Answer answer5 = new Answer(5, "Мне нужно в " + locations.get(14).getName(), questions.get(3), questions.get(4));
-        Answer answer6 = new Answer(6, "Уйти", questions.get(3), questions.get(2));
-        Answer answer7 = new Answer(7, "Спасибо! Буду должен", questions.get(5), questions.get(6));
-        Answer answer8 = new Answer(8, "Пока не надо, зайду позже", questions.get(5), questions.get(2));
+        Answer answer1 = new Answer(1, "Приветствовать", questionInit.getQuestionById(1), questionInit.getQuestionById(3));
+        Answer answer2 = new Answer(2, "Уйти", questionInit.getQuestionById(1), questionInit.getQuestionById(2));
+        Answer answer3 = new Answer(3, "Некоторые локации закрыты, как быть?", questionInit.getQuestionById(4), questionInit.getQuestionById(5));
+        Answer answer4 = new Answer(4, "Уйти", questionInit.getQuestionById(4), questionInit.getQuestionById(2));
+        Answer answer5 = new Answer(5, "Мне нужно в " + locationInit.getLocationById(14).getName(), questionInit.getQuestionById(3), questionInit.getQuestionById(4));
+        Answer answer6 = new Answer(6, "Уйти", questionInit.getQuestionById(3), questionInit.getQuestionById(2));
+        Answer answer7 = new Answer(7, "Спасибо! Буду должен", questionInit.getQuestionById(5), questionInit.getQuestionById(6));
+        Answer answer8 = new Answer(8, "Пока не надо, зайду позже", questionInit.getQuestionById(5), questionInit.getQuestionById(2));
 
-        Answer answer9 = new Answer(9, "Приветствовать", questions.get(7), questions.get(9));
-        Answer answer10 = new Answer(10, "Уйти", questions.get(7), questions.get(8));
-        Answer answer11 = new Answer(11, "Некоторые локации закрыты, как быть?", questions.get(10), questions.get(11));
-        Answer answer12 = new Answer(12, "Уйти", questions.get(10), questions.get(8));
-        Answer answer13 = new Answer(13, "Мне нужно в " + locations.get(14).getName(), questions.get(9), questions.get(10));
-        Answer answer14 = new Answer(14, "Уйти", questions.get(9), questions.get(8));
-        Answer answer15 = new Answer(15, "Спасибо! Буду должен", questions.get(11), questions.get(12));
-        Answer answer16 = new Answer(16, "Пока не надо, зайду позже", questions.get(11), questions.get(8));
+        Answer answer9 = new Answer(9, "Приветствовать", questionInit.getQuestionById(7), questionInit.getQuestionById(9));
+        Answer answer10 = new Answer(10, "Уйти", questionInit.getQuestionById(7), questionInit.getQuestionById(8));
+        Answer answer11 = new Answer(11, "Некоторые локации закрыты, как быть?", questionInit.getQuestionById(10), questionInit.getQuestionById(11));
+        Answer answer12 = new Answer(12, "Уйти", questionInit.getQuestionById(10), questionInit.getQuestionById(8));
+        Answer answer13 = new Answer(13, "Мне нужно в " + locationInit.getLocationById(14).getName(), questionInit.getQuestionById(9), questionInit.getQuestionById(10));
+        Answer answer14 = new Answer(14, "Уйти", questionInit.getQuestionById(9), questionInit.getQuestionById(8));
+        Answer answer15 = new Answer(15, "Спасибо! Буду должен", questionInit.getQuestionById(11), questionInit.getQuestionById(12));
+        Answer answer16 = new Answer(16, "Пока не надо, зайду позже", questionInit.getQuestionById(11), questionInit.getQuestionById(8));
 
-        Answer answer17 = new Answer(17, "Приветствовать", questions.get(13), questions.get(15));
-        Answer answer18 = new Answer(18, "Уйти", questions.get(13), questions.get(14));
-        Answer answer19 = new Answer(19, "Некоторые локации закрыты, как быть?", questions.get(16), questions.get(17));
-        Answer answer20 = new Answer(20, "Уйти", questions.get(16), questions.get(14));
-        Answer answer21 = new Answer(21, "Мне нужно в " + locations.get(14).getName(), questions.get(15), questions.get(16));
-        Answer answer22 = new Answer(22, "Уйти", questions.get(15), questions.get(14));
-        Answer answer23 = new Answer(23, "Спасибо! Буду должен", questions.get(17), questions.get(18));
-        Answer answer24 = new Answer(24, "Пока не надо, зайду позже", questions.get(17), questions.get(14));
+        Answer answer17 = new Answer(17, "Приветствовать", questionInit.getQuestionById(13), questionInit.getQuestionById(15));
+        Answer answer18 = new Answer(18, "Уйти", questionInit.getQuestionById(13), questionInit.getQuestionById(14));
+        Answer answer19 = new Answer(19, "Некоторые локации закрыты, как быть?", questionInit.getQuestionById(16), questionInit.getQuestionById(17));
+        Answer answer20 = new Answer(20, "Уйти", questionInit.getQuestionById(16), questionInit.getQuestionById(14));
+        Answer answer21 = new Answer(21, "Мне нужно в " + locationInit.getLocationById(14).getName(), questionInit.getQuestionById(15), questionInit.getQuestionById(16));
+        Answer answer22 = new Answer(22, "Уйти", questionInit.getQuestionById(15), questionInit.getQuestionById(14));
+        Answer answer23 = new Answer(23, "Спасибо! Буду должен", questionInit.getQuestionById(17), questionInit.getQuestionById(18));
+        Answer answer24 = new Answer(24, "Пока не надо, зайду позже", questionInit.getQuestionById(17), questionInit.getQuestionById(14));
 
-        Answer answer25 = new Answer(25, "Приветствовать", questions.get(19), questions.get(21));
-        Answer answer26 = new Answer(26, "Уйти", questions.get(19), questions.get(20));
-        Answer answer27 = new Answer(27, "Некоторые локации закрыты, как быть?", questions.get(22), questions.get(23));
-        Answer answer28 = new Answer(28, "Уйти", questions.get(22), questions.get(20));
-        Answer answer29 = new Answer(29, "Мне нужно в " + locations.get(14).getName(), questions.get(21), questions.get(22));
-        Answer answer30 = new Answer(30, "Уйти", questions.get(21), questions.get(20));
-        Answer answer31 = new Answer(31, "Спасибо! Буду должен", questions.get(23), questions.get(24));
-        Answer answer32 = new Answer(32, "Пока не надо, зайду позже", questions.get(23), questions.get(20));
+        Answer answer25 = new Answer(25, "Приветствовать", questionInit.getQuestionById(19), questionInit.getQuestionById(21));
+        Answer answer26 = new Answer(26, "Уйти", questionInit.getQuestionById(19), questionInit.getQuestionById(20));
+        Answer answer27 = new Answer(27, "Некоторые локации закрыты, как быть?", questionInit.getQuestionById(22), questionInit.getQuestionById(23));
+        Answer answer28 = new Answer(28, "Уйти", questionInit.getQuestionById(22), questionInit.getQuestionById(20));
+        Answer answer29 = new Answer(29, "Мне нужно в " + locationInit.getLocationById(14).getName(), questionInit.getQuestionById(21), questionInit.getQuestionById(22));
+        Answer answer30 = new Answer(30, "Уйти", questionInit.getQuestionById(21), questionInit.getQuestionById(20));
+        Answer answer31 = new Answer(31, "Спасибо! Буду должен", questionInit.getQuestionById(23), questionInit.getQuestionById(24));
+        Answer answer32 = new Answer(32, "Пока не надо, зайду позже", questionInit.getQuestionById(23), questionInit.getQuestionById(20));
 
-        Answer answer33 = new Answer(33, "Приветствовать", questions.get(25), questions.get(27));
-        Answer answer34 = new Answer(34, "Уйти", questions.get(25), questions.get(26));
-        Answer answer35 = new Answer(35, "Некоторые локации закрыты, как быть?", questions.get(28), questions.get(29));
-        Answer answer36 = new Answer(36, "Уйти", questions.get(28), questions.get(26));
-        Answer answer37 = new Answer(37, "Мне нужно в " + locations.get(14).getName(), questions.get(27), questions.get(28));
-        Answer answer38 = new Answer(38, "Уйти", questions.get(27), questions.get(26));
-        Answer answer39 = new Answer(39, "Спасибо! Буду должен", questions.get(29), questions.get(30));
-        Answer answer40 = new Answer(40, "Пока не надо, зайду позже", questions.get(29), questions.get(26));
+        Answer answer33 = new Answer(33, "Приветствовать", questionInit.getQuestionById(25), questionInit.getQuestionById(27));
+        Answer answer34 = new Answer(34, "Уйти", questionInit.getQuestionById(25), questionInit.getQuestionById(26));
+        Answer answer35 = new Answer(35, "Некоторые локации закрыты, как быть?", questionInit.getQuestionById(28), questionInit.getQuestionById(29));
+        Answer answer36 = new Answer(36, "Уйти", questionInit.getQuestionById(28), questionInit.getQuestionById(26));
+        Answer answer37 = new Answer(37, "Мне нужно в " + locationInit.getLocationById(14).getName(), questionInit.getQuestionById(27), questionInit.getQuestionById(28));
+        Answer answer38 = new Answer(38, "Уйти", questionInit.getQuestionById(27), questionInit.getQuestionById(26));
+        Answer answer39 = new Answer(39, "Спасибо! Буду должен", questionInit.getQuestionById(29), questionInit.getQuestionById(30));
+        Answer answer40 = new Answer(40, "Пока не надо, зайду позже", questionInit.getQuestionById(29), questionInit.getQuestionById(26));
 
-        Answer answer41 = new Answer(41, "Приветствовать", questions.get(31), questions.get(33));
-        Answer answer42 = new Answer(42, "Уйти", questions.get(31), questions.get(32));
-        Answer answer43 = new Answer(43, "Некоторые локации закрыты, как быть?", questions.get(34), questions.get(35));
-        Answer answer44 = new Answer(44, "Уйти", questions.get(34), questions.get(32));
-        Answer answer45 = new Answer(45, "Мне нужно в " + locations.get(14).getName(), questions.get(33), questions.get(34));
-        Answer answer46 = new Answer(46, "Уйти", questions.get(33), questions.get(32));
-        Answer answer47 = new Answer(47, "Спасибо! Буду должен", questions.get(35), questions.get(36));
-        Answer answer48 = new Answer(48, "Пока не надо, зайду позже", questions.get(35), questions.get(32));
+        Answer answer41 = new Answer(41, "Приветствовать", questionInit.getQuestionById(31), questionInit.getQuestionById(33));
+        Answer answer42 = new Answer(42, "Уйти", questionInit.getQuestionById(31), questionInit.getQuestionById(32));
+        Answer answer43 = new Answer(43, "Некоторые локации закрыты, как быть?", questionInit.getQuestionById(34), questionInit.getQuestionById(35));
+        Answer answer44 = new Answer(44, "Уйти", questionInit.getQuestionById(34), questionInit.getQuestionById(32));
+        Answer answer45 = new Answer(45, "Мне нужно в " + locationInit.getLocationById(14).getName(), questionInit.getQuestionById(33), questionInit.getQuestionById(34));
+        Answer answer46 = new Answer(46, "Уйти", questionInit.getQuestionById(33), questionInit.getQuestionById(32));
+        Answer answer47 = new Answer(47, "Спасибо! Буду должен", questionInit.getQuestionById(35), questionInit.getQuestionById(36));
+        Answer answer48 = new Answer(48, "Пока не надо, зайду позже", questionInit.getQuestionById(35), questionInit.getQuestionById(32));
 
-        Answer answer49 = new Answer(49, "Приветствовать", questions.get(37), questions.get(39));
-        Answer answer50 = new Answer(50, "Уйти", questions.get(37), questions.get(38));
-        Answer answer51 = new Answer(51, "Некоторые локации закрыты, как быть?", questions.get(40), questions.get(41));
-        Answer answer52 = new Answer(52, "Уйти", questions.get(40), questions.get(38));
-        Answer answer53 = new Answer(53, "Мне нужно в " + locations.get(14).getName(), questions.get(39), questions.get(40));
-        Answer answer54 = new Answer(54, "Уйти", questions.get(39), questions.get(38));
-        Answer answer55 = new Answer(55, "Спасибо! Буду должен", questions.get(41), questions.get(42));
-        Answer answer56 = new Answer(56, "Пока не надо, зайду позже", questions.get(41), questions.get(38));
+        Answer answer49 = new Answer(49, "Приветствовать", questionInit.getQuestionById(37), questionInit.getQuestionById(39));
+        Answer answer50 = new Answer(50, "Уйти", questionInit.getQuestionById(37), questionInit.getQuestionById(38));
+        Answer answer51 = new Answer(51, "Некоторые локации закрыты, как быть?", questionInit.getQuestionById(40), questionInit.getQuestionById(41));
+        Answer answer52 = new Answer(52, "Уйти", questionInit.getQuestionById(40), questionInit.getQuestionById(38));
+        Answer answer53 = new Answer(53, "Мне нужно в " + locationInit.getLocationById(14).getName(), questionInit.getQuestionById(39), questionInit.getQuestionById(40));
+        Answer answer54 = new Answer(54, "Уйти", questionInit.getQuestionById(39), questionInit.getQuestionById(38));
+        Answer answer55 = new Answer(55, "Спасибо! Буду должен", questionInit.getQuestionById(41), questionInit.getQuestionById(42));
+        Answer answer56 = new Answer(56, "Пока не надо, зайду позже", questionInit.getQuestionById(41), questionInit.getQuestionById(38));
 
-        Answer answer57 = new Answer(57, "Приветствовать", questions.get(43), questions.get(45));
-        Answer answer58 = new Answer(58, "Уйти", questions.get(43), questions.get(44));
-        Answer answer59 = new Answer(59, "Некоторые локации закрыты, как быть?", questions.get(46), questions.get(47));
-        Answer answer60 = new Answer(60, "Уйти", questions.get(46), questions.get(44));
-        Answer answer61 = new Answer(61, "Мне нужно в " + locations.get(14).getName(), questions.get(45), questions.get(46));
-        Answer answer62 = new Answer(62, "Уйти", questions.get(45), questions.get(44));
-        Answer answer63 = new Answer(63, "Спасибо! Буду должен", questions.get(47), questions.get(48));
-        Answer answer64 = new Answer(64, "Пока не надо, зайду позже", questions.get(47), questions.get(44));
+        Answer answer57 = new Answer(57, "Приветствовать", questionInit.getQuestionById(43), questionInit.getQuestionById(45));
+        Answer answer58 = new Answer(58, "Уйти", questionInit.getQuestionById(43), questionInit.getQuestionById(44));
+        Answer answer59 = new Answer(59, "Некоторые локации закрыты, как быть?", questionInit.getQuestionById(46), questionInit.getQuestionById(47));
+        Answer answer60 = new Answer(60, "Уйти", questionInit.getQuestionById(46), questionInit.getQuestionById(44));
+        Answer answer61 = new Answer(61, "Мне нужно в " + locationInit.getLocationById(14).getName(), questionInit.getQuestionById(45), questionInit.getQuestionById(46));
+        Answer answer62 = new Answer(62, "Уйти", questionInit.getQuestionById(45), questionInit.getQuestionById(44));
+        Answer answer63 = new Answer(63, "Спасибо! Буду должен", questionInit.getQuestionById(47), questionInit.getQuestionById(48));
+        Answer answer64 = new Answer(64, "Пока не надо, зайду позже", questionInit.getQuestionById(47), questionInit.getQuestionById(44));
 
-        Answer answer65 = new Answer(65, "Приветствовать", questions.get(49), questions.get(51));
-        Answer answer66 = new Answer(66, "Уйти", questions.get(49), questions.get(50));
-        Answer answer67 = new Answer(67, "Некоторые локации закрыты, как быть?", questions.get(52), questions.get(53));
-        Answer answer68 = new Answer(68, "Уйти", questions.get(52), questions.get(50));
-        Answer answer69 = new Answer(69, "Мне нужно в " + locations.get(14).getName(), questions.get(51), questions.get(52));
-        Answer answer70 = new Answer(70, "Уйти", questions.get(51), questions.get(50));
-        Answer answer71 = new Answer(71, "Спасибо! Буду должен", questions.get(53), questions.get(54));
-        Answer answer72 = new Answer(72, "Пока не надо, зайду позже", questions.get(53), questions.get(50));
+        Answer answer65 = new Answer(65, "Приветствовать", questionInit.getQuestionById(49), questionInit.getQuestionById(51));
+        Answer answer66 = new Answer(66, "Уйти", questionInit.getQuestionById(49), questionInit.getQuestionById(50));
+        Answer answer67 = new Answer(67, "Некоторые локации закрыты, как быть?", questionInit.getQuestionById(52), questionInit.getQuestionById(53));
+        Answer answer68 = new Answer(68, "Уйти", questionInit.getQuestionById(52), questionInit.getQuestionById(50));
+        Answer answer69 = new Answer(69, "Мне нужно в " + locationInit.getLocationById(14).getName(), questionInit.getQuestionById(51), questionInit.getQuestionById(52));
+        Answer answer70 = new Answer(70, "Уйти", questionInit.getQuestionById(51), questionInit.getQuestionById(50));
+        Answer answer71 = new Answer(71, "Спасибо! Буду должен", questionInit.getQuestionById(53), questionInit.getQuestionById(54));
+        Answer answer72 = new Answer(72, "Пока не надо, зайду позже", questionInit.getQuestionById(53), questionInit.getQuestionById(50));
 
         answers.put(1, answer1);
         answers.put(2, answer2);
@@ -175,5 +176,15 @@ public class AnswerInit {
         answers.put(70, answer70);
         answers.put(71, answer71);
         answers.put(72, answer72);
+    }
+
+    public List<Answer> getAnswersByQuestionId(int questionId) {
+        return answers.values().stream()
+                .filter(v -> v.getPrev().getId() == questionId)
+                .collect(Collectors.toList());
+    }
+
+    public Answer getAnswerById(int id) {
+        return answers.get(id);
     }
 }

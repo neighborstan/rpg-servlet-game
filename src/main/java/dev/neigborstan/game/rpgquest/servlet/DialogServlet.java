@@ -48,20 +48,20 @@ public class DialogServlet extends HttpServlet {
             personId = 0;
         }
 
-        Question question = repo.getPersonById(personId).getStartQuestion();
+        Question question = repo.getPersonInit().getPersonById(personId).getStartQuestion();
 
         if (answerIdParam != null) {
-            question = repo.getAnswerById(Integer.parseInt(answerIdParam)).getNext();
+            question = repo.getAnswerInit().getAnswerById(Integer.parseInt(answerIdParam)).getNext();
         }
 
         if (isDialogSuccess(question)) {
             String userName = (String) session.getAttribute("userName");
-            User user = repo.getUserByName(userName);
-            Location blockedLocation = repo.getPersonById(personId).getKey().getLocation();
-            user.getLocations().get(blockedLocation.getId()).setBlock(false);
+            User user = repo.getUserInit().getUserByName(userName);
+            Location blockedLocation = repo.getPersonInit().getPersonById(personId).getKey().getLocation();
+            user.getLocationInit().getLocationById(blockedLocation.getId()).setBlock(false);
         }
 
-        List<Answer> answers = repo.getAnswersByQuestionId(question.getId());
+        List<Answer> answers = repo.getAnswerInit().getAnswersByQuestionId(question.getId());
         req.setAttribute("question", question);
         req.setAttribute("answers", answers);
 

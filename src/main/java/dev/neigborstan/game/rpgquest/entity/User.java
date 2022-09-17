@@ -1,5 +1,6 @@
 package dev.neigborstan.game.rpgquest.entity;
 
+import dev.neigborstan.game.rpgquest.init.LocationInit;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,13 +16,14 @@ public class User {
     @Setter
     private int currentLocationId;
     @Getter
-    private Map<Integer, Location> locations;
+    @Setter
+    private LocationInit locationInit;
 
 
-    public User(int id, String name, int currentLocationId, Map<Integer, Location> locations) {
+    public User(int id, String name, int currentLocationId, LocationInit locationInit) {
         this.id = id;
         this.name = name;
         this.currentLocationId = currentLocationId;
-        this.locations = locations;
+        this.locationInit = locationInit;
     }
 }

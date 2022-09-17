@@ -43,11 +43,11 @@ public class HelloServlet extends HttpServlet {
 
         session.setAttribute("users", req.getAttribute("users"));
 
-        User user = repo.getUserByName(userName);
+        User user = repo.getUserInit().getUserByName(userName);
 
         if (removeBtn != null) {
             if (isUserExist(userName)) {
-                repo.deleteUser(user);
+                repo.getUserInit().deleteUser(user);
                 req.setAttribute("tooltip", String.format("<span class='text-success'>Пользователь '%s' удален</span>", userName));
             } else {
                 req.setAttribute("tooltip", String.format("<span class='text-danger'>Пользователя '%s' не существует</span>", userName));
@@ -68,7 +68,7 @@ public class HelloServlet extends HttpServlet {
             return;
         }
 
-        if (!repo.getUsers().isEmpty() && isUserExist(userName)) {
+        if (!repo.getUserInit().getUsers().isEmpty() && isUserExist(userName)) {
             req.setAttribute("tooltip", String.format("<span class='text-danger'>Пользователь '%s' уже существует</span>", userName));
 //            session.setAttribute("userName", userName);
             getServletContext().getRequestDispatcher("/").forward(req, resp);
@@ -76,13 +76,13 @@ public class HelloServlet extends HttpServlet {
         } else {
             session.removeAttribute("tooltip");
             session.setAttribute("userName", userName);
-            repo.createUser(userName);
+            repo.getUserInit().createUser(userName);
             getServletContext().getRequestDispatcher("/action").forward(req, resp);
         }
     }
 
     private boolean isUserExist(String userName) {
-        return repo.getUsers().stream()
+        return repo.getUserInit().getUsers().stream()
                 .map(User::getName)
                 .anyMatch(s -> s.equals(userName));
     }

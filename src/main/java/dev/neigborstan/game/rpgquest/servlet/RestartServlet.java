@@ -36,8 +36,8 @@ public class RestartServlet extends HttpServlet {
 
         String userName = (String) session.getAttribute("userName");
 
-        User user = repo.getUserByName(userName);
-        repo.restartUser(user);
+        User user = repo.getUserInit().getUserByName(userName);
+        repo.getUserInit().restartUser(user);
 
         getServletContext().getRequestDispatcher("/action").forward(req, resp);
     }

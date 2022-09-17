@@ -7,23 +7,24 @@ import dev.neigborstan.game.rpgquest.entity.Question;
 import lombok.Getter;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class PersonInit {
-    @Getter
     private final Map<Integer, Person> persons = new HashMap<>();
 
-    public PersonInit(Map<Integer, Location> locations, Map<Integer, Question> questions, Map<Integer, LocationKey> locationsKeys) {
+    public PersonInit(LocationInit locationInit, QuestionInit questionInit, LocationKeyInit key) {
 
-        Person trekon = new Person(1, "Trekon", locations.get(1), questions.get(1), locationsKeys.get(1));
-        Person tibost = new Person(2, "Tibost", locations.get(3), questions.get(7), locationsKeys.get(2));
-        Person faramond = new Person(3, "Faramond", locations.get(5), questions.get(13), locationsKeys.get(3));
-        Person gaglus = new Person(4, "Gaglus", locations.get(7), questions.get(19), locationsKeys.get(6));
-        Person rineamit = new Person(5, "Rineamit", locations.get(8), questions.get(37), locationsKeys.get(7));
-        Person hudd = new Person(6, "Hudd", locations.get(9), questions.get(25), locationsKeys.get(5));
-        Person reala = new Person(7, "Reala", locations.get(11), questions.get(31), locationsKeys.get(8));
-        Person holren = new Person(8, "Holren", locations.get(12), questions.get(43), locationsKeys.get(4));
-        Person linetta = new Person(9, "Linetta", locations.get(15), questions.get(49), locationsKeys.get(9));
+        Person trekon = new Person(1, "Trekon", locationInit.getLocationById(1), questionInit.getQuestionById(1), key.getLocationKeyById(1));
+        Person tibost = new Person(2, "Tibost", locationInit.getLocationById(3), questionInit.getQuestionById(7), key.getLocationKeyById(2));
+        Person faramond = new Person(3, "Faramond", locationInit.getLocationById(5), questionInit.getQuestionById(13), key.getLocationKeyById(3));
+        Person gaglus = new Person(4, "Gaglus", locationInit.getLocationById(7), questionInit.getQuestionById(19), key.getLocationKeyById(6));
+        Person rineamit = new Person(5, "Rineamit", locationInit.getLocationById(8), questionInit.getQuestionById(37), key.getLocationKeyById(7));
+        Person hudd = new Person(6, "Hudd", locationInit.getLocationById(9), questionInit.getQuestionById(25), key.getLocationKeyById(5));
+        Person reala = new Person(7, "Reala", locationInit.getLocationById(11), questionInit.getQuestionById(31), key.getLocationKeyById(8));
+        Person holren = new Person(8, "Holren", locationInit.getLocationById(12), questionInit.getQuestionById(43), key.getLocationKeyById(4));
+        Person linetta = new Person(9, "Linetta", locationInit.getLocationById(15), questionInit.getQuestionById(49), key.getLocationKeyById(9));
 //        Person okada = new Person(10, "Okada", kunszalia, question1);
 //        Person ammia = new Person(11, "Ammia", freitileria, question1);
 //        Person faradir = new Person(12, "Faradir", alfnirland, question1);
@@ -40,5 +41,15 @@ public class PersonInit {
         persons.put(7, reala);
         persons.put(8, holren);
         persons.put(9, linetta);
+    }
+
+    public Person getPersonById(int personId){
+        return persons.get(personId);
+    }
+
+    public List<Person> getPersonsByLocationId(int locationId) {
+        return persons.values().stream()
+                .filter(v -> v.getLocation().getId() == locationId)
+                .collect(Collectors.toList());
     }
 }

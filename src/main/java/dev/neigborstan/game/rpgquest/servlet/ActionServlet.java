@@ -47,17 +47,17 @@ public class ActionServlet extends HttpServlet {
             selectedLocationId = START_LOCATION_ID;
         }
 
-        User user = repo.getUserByName(userName);
+        User user = repo.getUserInit().getUserByName(userName);
         user.setCurrentLocationId(selectedLocationId);
 
-        Location location = user.getLocations().get(selectedLocationId);
+        Location location = user.getLocationInit().getLocationById(selectedLocationId);
         List<Location> locationsForMovement = location.getLocationsForMovement();
 
-        if (selectedLocationId == END_LOCATION_ID){
+        if (selectedLocationId == END_LOCATION_ID) {
             req.setAttribute("win", true);
         }
 
-        List<Person> personsOnLocation = repo.getPersonsByLocationId(selectedLocationId);
+        List<Person> personsOnLocation = repo.getPersonInit().getPersonsByLocationId(selectedLocationId);
         if (personsOnLocation.isEmpty()) {
             session.removeAttribute("personsOnLocation");
         } else {
