@@ -6,14 +6,11 @@ import lombok.Setter;
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
 public class Location {
-    @Getter
     private int id;
-    @Getter
     private String name;
-    @Getter
     private List<Location> locationsForMovement;
-    @Getter
     @Setter
     private boolean block;
 

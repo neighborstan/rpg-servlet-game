@@ -2,16 +2,12 @@ package dev.neigborstan.game.rpgquest.entity;
 
 import lombok.Getter;
 
+@Getter
 public class Person {
-    @Getter
     private int id;
-    @Getter
     private String name;
-    @Getter
     private Location location;
-    @Getter
     private Question startQuestion;
-    @Getter
     private LocationKey key;
 
     public Person(int id, String name, Location location, Question startQuestion) {
