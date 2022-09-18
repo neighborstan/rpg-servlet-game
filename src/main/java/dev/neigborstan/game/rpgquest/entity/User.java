@@ -1,6 +1,6 @@
 package dev.neigborstan.game.rpgquest.entity;
 
-import dev.neigborstan.game.rpgquest.init.LocationInit;
+import dev.neigborstan.game.rpgquest.repository.LocationRepo;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -15,5 +15,5 @@ public class User {
     @Setter
     private int currentLocationId;
     @Setter
-    private LocationInit locationInit;
+    private LocationRepo locationRepo;
 }

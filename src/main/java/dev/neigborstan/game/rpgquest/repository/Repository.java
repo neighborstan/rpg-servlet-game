@@ -1,39 +1,18 @@
 package dev.neigborstan.game.rpgquest.repository;
 
+import java.util.HashMap;
+import java.util.Map;
 
-import dev.neigborstan.game.rpgquest.init.*;
-import lombok.Getter;
 
+public class Repository<K, T> {
 
-public class Repository {
-    private static Repository INSTANCE;
+    public Map<K, T> repo = new HashMap<>();
 
-    private int userId = 0;
-    private final LocationInit locationInit;
-    private final QuestionInit questionInit;
-    private final LocationKeyInit locationKeyInit;
-    @Getter
-    private final AnswerInit answerInit;
-    @Getter
-    private final PersonInit personInit;
-    @Getter
-    private UserInit userInit;
-
-    private Repository() {
-        userInit = new UserInit();
-        locationInit = new LocationInit();
-        locationKeyInit = new LocationKeyInit(locationInit);
-        questionInit = new QuestionInit(locationInit);
-        answerInit = new AnswerInit(locationInit, questionInit);
-        personInit = new PersonInit(locationInit, questionInit, locationKeyInit);
-
+    public void save(K id, T entity) {
+        repo.put(id, entity);
     }
 
-    public static Repository getInstance() {
-        if (INSTANCE == null) {
-            INSTANCE = new Repository();
-        }
-
-        return INSTANCE;
+    public T getById(K id) {
+        return repo.get(id);
     }
 }

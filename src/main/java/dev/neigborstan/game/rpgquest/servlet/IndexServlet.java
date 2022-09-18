@@ -1,6 +1,6 @@
 package dev.neigborstan.game.rpgquest.servlet;
 
-import dev.neigborstan.game.rpgquest.repository.Repository;
+import dev.neigborstan.game.rpgquest.repository.UserRepo;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,8 +19,10 @@ public class IndexServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Repository repo = (Repository) req.getServletContext().getAttribute("repository");
-        req.setAttribute("users", repo.getUserInit().getUsers());
+        UserRepo userRepo = (UserRepo) req.getServletContext().getAttribute("userRepo");
+        if (userRepo != null) {
+            req.setAttribute("users", userRepo.getUsers());
+        }
 
         getServletContext().getRequestDispatcher("/jsp/index.jsp").forward(req, resp);
     }
