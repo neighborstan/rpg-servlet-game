@@ -1,39 +1,27 @@
 package dev.neigborstan.game.rpgquest.init;
 
-import dev.neigborstan.game.rpgquest.entity.Location;
 import dev.neigborstan.game.rpgquest.entity.LocationKey;
-import lombok.Getter;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class LocationKeyInit {
-    private Map<Integer, LocationKey> locationsKeys = new HashMap<>();
+    private final Map<Integer, LocationKey> locationsKeys = new HashMap<>();
 
     public LocationKeyInit(LocationInit locationInit) {
 
-        LocationKey kunszaliaKey = new LocationKey(1, locationInit.getLocationById(2));
-        LocationKey olboreKey = new LocationKey(2, locationInit.getLocationById(5));
-        LocationKey alfnirlandKey = new LocationKey(3, locationInit.getLocationById(6));
-        LocationKey krismaaKey = new LocationKey(4, locationInit.getLocationById(15));
-        LocationKey seirateliaKey = new LocationKey(5, locationInit.getLocationById(8));
-        LocationKey abrenusKey = new LocationKey(6, locationInit.getLocationById(10));
-        LocationKey nolahmaaKey = new LocationKey(7, locationInit.getLocationById(13));
-        LocationKey anolariaKey = new LocationKey(8, locationInit.getLocationById(12));
-        LocationKey akosiaaKey = new LocationKey(9, locationInit.getLocationById(14));
-
-        locationsKeys.put(1, kunszaliaKey);
-        locationsKeys.put(2, olboreKey);
-        locationsKeys.put(3, alfnirlandKey);
-        locationsKeys.put(4, krismaaKey);
-        locationsKeys.put(5, seirateliaKey);
-        locationsKeys.put(6, abrenusKey);
-        locationsKeys.put(7, nolahmaaKey);
-        locationsKeys.put(8, anolariaKey);
-        locationsKeys.put(9, akosiaaKey);
+        locationsKeys.put(1, new LocationKey(1, locationInit.getLocationById(2)));
+        locationsKeys.put(2, new LocationKey(2, locationInit.getLocationById(5)));
+        locationsKeys.put(3, new LocationKey(3, locationInit.getLocationById(6)));
+        locationsKeys.put(4, new LocationKey(4, locationInit.getLocationById(15)));
+        locationsKeys.put(5, new LocationKey(5, locationInit.getLocationById(8)));
+        locationsKeys.put(6, new LocationKey(6, locationInit.getLocationById(10)));
+        locationsKeys.put(7, new LocationKey(7, locationInit.getLocationById(13)));
+        locationsKeys.put(8, new LocationKey(8, locationInit.getLocationById(12)));
+        locationsKeys.put(9, new LocationKey(9, locationInit.getLocationById(14)));
     }
 
-    public LocationKey getLocationKeyById(int locationKeyId){
+    public LocationKey getLocationKeyById(int locationKeyId) {
         return locationsKeys.get(locationKeyId);
     }
 }

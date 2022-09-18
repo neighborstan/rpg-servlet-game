@@ -1,7 +1,6 @@
 package dev.neigborstan.game.rpgquest.init;
 
 import dev.neigborstan.game.rpgquest.entity.Location;
-import lombok.Getter;
 
 import java.util.Arrays;
 import java.util.HashMap;

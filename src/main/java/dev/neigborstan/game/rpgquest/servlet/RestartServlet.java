@@ -1,6 +1,5 @@
 package dev.neigborstan.game.rpgquest.servlet;
 
-import dev.neigborstan.game.rpgquest.entity.Location;
 import dev.neigborstan.game.rpgquest.entity.User;
 import dev.neigborstan.game.rpgquest.repository.Repository;
 

@@ -11,9 +11,6 @@ public class UserInit {
     @Getter
     private final List<User> users = new ArrayList<>();
 
-    public UserInit() {
-    }
-
     public void createUser(String userName) {
         userId++;
         User user = new User(userId, userName, 1, new LocationInit());
