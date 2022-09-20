@@ -14,8 +14,9 @@ class UserRepoTest {
 
     @Test
     void createUser() {
-        String expectedUsername = "userName";
         UserRepo userRepo = new UserRepo();
+
+        String expectedUsername = "userName";
         userRepo.createUser(expectedUsername);
 
         User actual = userRepo.getUsers().stream()
@@ -28,7 +29,8 @@ class UserRepoTest {
 
     @Test
     void restartUser() {
-//        НЕ СМОГ (
+
+
     }
 
     @Test

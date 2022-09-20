@@ -2,8 +2,7 @@ package dev.neigborstan.game.rpgquest.repository;
 
 import dev.neigborstan.game.rpgquest.entity.Location;
 import dev.neigborstan.game.rpgquest.init.LocationInit;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,12 +12,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class LocationRepoTest {
 
-    @ParameterizedTest
-    @ValueSource(ints = {1, 2, 3, 4, 5})
-    void getLocationByIdDefault(int locationId) {
+    @Test
+    void getLocationByIdDefault() {
+        int locationId = 2;
         List<Location> locations = new ArrayList<>();
 
-        IntStream.rangeClosed(1, 5)
+        IntStream.rangeClosed(1, 3)
                 .forEach((num) -> locations.add(new Location(num, "text" + num, false)));
 
         LocationInit locationInit = new LocationInit();

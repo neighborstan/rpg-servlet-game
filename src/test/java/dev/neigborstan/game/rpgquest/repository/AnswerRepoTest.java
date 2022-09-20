@@ -2,8 +2,7 @@ package dev.neigborstan.game.rpgquest.repository;
 
 import dev.neigborstan.game.rpgquest.entity.Answer;
 import dev.neigborstan.game.rpgquest.entity.Question;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import java.util.ArrayList;
@@ -14,12 +13,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class AnswerRepoTest {
 
-    @ParameterizedTest
-    @ValueSource(ints = {1, 2, 3, 4, 5})
-    void getAnswersByQuestionId(int questionId) {
+    @Test
+    void getAnswersByQuestionId() {
+        int questionId = 2;
         List<Answer> answers = new ArrayList<>();
 
-        IntStream.rangeClosed(1, 5)
+        IntStream.rangeClosed(1, 3)
                 .forEach((num) -> answers.add(new Answer(
                         num, "text" + num, new Question(
                         num, "text" + num, Question.Type.CONTINUE), Mockito.mock(Question.class)))
