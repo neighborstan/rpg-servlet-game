@@ -10,7 +10,7 @@ public class LocationRepo extends Repository<Integer, Location> {
         this.locationInit = locationInit;
     }
 
-    public Location getLocationByIdDefault(int locationId) {
+    public Location getLocationById(int locationId) {
 
         return locationInit.getLocations().stream()
                 .filter(userLocation -> userLocation.getId() == locationId)

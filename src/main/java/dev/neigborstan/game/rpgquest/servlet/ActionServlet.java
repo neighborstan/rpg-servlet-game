@@ -54,7 +54,7 @@ public class ActionServlet extends HttpServlet {
         User user = userRepo.getUserByName(userName);
         user.setCurrentLocationId(selectedLocationId);
 
-        Location location = user.getLocationRepo().getLocationByIdDefault(selectedLocationId);
+        Location location = user.getLocationRepo().getLocationById(selectedLocationId);
         List<Location> locationsForMovement = location.getLocationsForMovement();
 
         if (selectedLocationId == END_LOCATION_ID) {

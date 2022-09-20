@@ -64,7 +64,7 @@ public class DialogServlet extends HttpServlet {
             String userName = (String) session.getAttribute("userName");
             User user = userRepo.getUserByName(userName);
             Location blockedLocation = personRepo.getById(personId).getKey().getLocation();
-            user.getLocationRepo().getLocationByIdDefault(blockedLocation.getId()).setBlock(false);
+            user.getLocationRepo().getLocationById(blockedLocation.getId()).setBlock(false);
         }
 
         List<Answer> answers = answerRepo.getAnswersByQuestionId(question.getId());
