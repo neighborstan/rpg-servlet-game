@@ -1,27 +1,26 @@
 package dev.neigborstan.game.rpgquest.init;
 
 import dev.neigborstan.game.rpgquest.entity.LocationKey;
+import dev.neigborstan.game.rpgquest.repository.LocationRepo;
+import lombok.Getter;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LocationKeyInit {
-    private final Map<Integer, LocationKey> locationsKeys = new HashMap<>();
+    @Getter
+    private final List<LocationKey> locationKeys = new ArrayList<>();
 
-    public LocationKeyInit(LocationInit locationInit) {
+    public LocationKeyInit(LocationRepo locationRepo) {
 
-        locationsKeys.put(1, new LocationKey(1, locationInit.getLocationById(2)));
-        locationsKeys.put(2, new LocationKey(2, locationInit.getLocationById(5)));
-        locationsKeys.put(3, new LocationKey(3, locationInit.getLocationById(6)));
-        locationsKeys.put(4, new LocationKey(4, locationInit.getLocationById(15)));
-        locationsKeys.put(5, new LocationKey(5, locationInit.getLocationById(8)));
-        locationsKeys.put(6, new LocationKey(6, locationInit.getLocationById(10)));
-        locationsKeys.put(7, new LocationKey(7, locationInit.getLocationById(13)));
-        locationsKeys.put(8, new LocationKey(8, locationInit.getLocationById(12)));
-        locationsKeys.put(9, new LocationKey(9, locationInit.getLocationById(14)));
-    }
-
-    public LocationKey getLocationKeyById(int locationKeyId) {
-        return locationsKeys.get(locationKeyId);
+        locationKeys.add(new LocationKey(1, locationRepo.getById(2)));
+        locationKeys.add(new LocationKey(2, locationRepo.getById(5)));
+        locationKeys.add(new LocationKey(3, locationRepo.getById(6)));
+        locationKeys.add(new LocationKey(4, locationRepo.getById(15)));
+        locationKeys.add(new LocationKey(5, locationRepo.getById(8)));
+        locationKeys.add(new LocationKey(6, locationRepo.getById(10)));
+        locationKeys.add(new LocationKey(7, locationRepo.getById(13)));
+        locationKeys.add(new LocationKey(8, locationRepo.getById(12)));
+        locationKeys.add(new LocationKey(9, locationRepo.getById(14)));
     }
 }

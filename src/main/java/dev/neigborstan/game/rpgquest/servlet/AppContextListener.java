@@ -1,6 +1,8 @@
 package dev.neigborstan.game.rpgquest.servlet;
 
-import dev.neigborstan.game.rpgquest.repository.Repository;
+import dev.neigborstan.game.rpgquest.entity.*;
+import dev.neigborstan.game.rpgquest.init.*;
+import dev.neigborstan.game.rpgquest.repository.*;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
@@ -12,11 +14,48 @@ public class AppContextListener implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
-        Repository repository = Repository.getInstance();
         ServletContext ctx = servletContextEvent.getServletContext();
 
-        ctx.setAttribute("repository", repository);
+        UserRepo userRepo = new UserRepo();
+        ctx.setAttribute("userRepo", userRepo);
 
+        LocationInit locationInit = new LocationInit();
+        LocationRepo locationRepo = new LocationRepo(locationInit);
+        for (Location location : locationInit.getLocations()) {
+            locationRepo.save(location.getId(), location);
+        }
+        ctx.setAttribute("locationRepo", locationRepo);
+
+
+        LocationKeyInit locationKeyInit = new LocationKeyInit(locationRepo);
+        LocationKeyRepo locationKeyRepo = new LocationKeyRepo();
+        for (LocationKey locationKey : locationKeyInit.getLocationKeys()) {
+            locationKeyRepo.save(locationKey.getId(), locationKey);
+        }
+        ctx.setAttribute("locationKeyRepo", locationKeyRepo);
+
+
+        QuestionInit questionInit = new QuestionInit(locationRepo);
+        QuestionRepo questionRepo = new QuestionRepo();
+        for (Question question : questionInit.getQuestions()) {
+            questionRepo.save(question.getId(), question);
+        }
+        ctx.setAttribute("questionRepo", questionRepo);
+
+
+        AnswerInit answerInit = new AnswerInit(locationRepo, questionRepo);
+        AnswerRepo answerRepo = new AnswerRepo();
+        for (Answer answer : answerInit.getAnswers()) {
+            answerRepo.save(answer.getId(), answer);
+        }
+        ctx.setAttribute("answerRepo", answerRepo);
+
+
+        PersonInit personInit = new PersonInit(locationRepo, questionRepo, locationKeyRepo);
+        PersonRepo personRepo = new PersonRepo();
+        for (Person person : personInit.getPersons()) {
+            personRepo.save(person.getId(), person);
+        }
+        ctx.setAttribute("personRepo", personRepo);
     }
-
 }

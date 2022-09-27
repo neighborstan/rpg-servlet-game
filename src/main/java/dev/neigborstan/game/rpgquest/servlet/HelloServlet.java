@@ -1,7 +1,7 @@
 package dev.neigborstan.game.rpgquest.servlet;
 
-import dev.neigborstan.game.rpgquest.repository.Repository;
 import dev.neigborstan.game.rpgquest.entity.User;
+import dev.neigborstan.game.rpgquest.repository.UserRepo;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -15,13 +15,13 @@ import java.io.IOException;
 
 @WebServlet("/start")
 public class HelloServlet extends HttpServlet {
-    private Repository repo = null;
+    UserRepo userRepo;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
         ServletContext servletContext = config.getServletContext();
-        repo = (Repository) servletContext.getAttribute("repository");
+        userRepo = (UserRepo) servletContext.getAttribute("userRepo");
     }
 
     @Override
@@ -36,18 +36,17 @@ public class HelloServlet extends HttpServlet {
         req.setCharacterEncoding("utf-8");
         req.removeAttribute("tooltip");
 
-//        String startBtn = req.getParameter("startBtn");
         String continueBtn = req.getParameter("continueBtn");
         String removeBtn = req.getParameter("removeBtn");
         String userName = req.getParameter("username");
 
         session.setAttribute("users", req.getAttribute("users"));
 
-        User user = repo.getUserInit().getUserByName(userName);
+        User user = userRepo.getUserByName(userName);
 
         if (removeBtn != null) {
             if (isUserExist(userName)) {
-                repo.getUserInit().deleteUser(user);
+                userRepo.deleteUser(user);
                 req.setAttribute("tooltip", String.format("<span class='text-success'>Пользователь '%s' удален</span>", userName));
             } else {
                 req.setAttribute("tooltip", String.format("<span class='text-danger'>Пользователя '%s' не существует</span>", userName));
@@ -68,21 +67,20 @@ public class HelloServlet extends HttpServlet {
             return;
         }
 
-        if (!repo.getUserInit().getUsers().isEmpty() && isUserExist(userName)) {
+        if (!userRepo.getUsers().isEmpty() && isUserExist(userName)) {
             req.setAttribute("tooltip", String.format("<span class='text-danger'>Пользователь '%s' уже существует</span>", userName));
-//            session.setAttribute("userName", userName);
             getServletContext().getRequestDispatcher("/").forward(req, resp);
 
         } else {
             session.removeAttribute("tooltip");
             session.setAttribute("userName", userName);
-            repo.getUserInit().createUser(userName);
+            userRepo.createUser(userName);
             getServletContext().getRequestDispatcher("/action").forward(req, resp);
         }
     }
 
     private boolean isUserExist(String userName) {
-        return repo.getUserInit().getUsers().stream()
+        return userRepo.getUsers().stream()
                 .map(User::getName)
                 .anyMatch(s -> s.equals(userName));
     }

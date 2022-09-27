@@ -1,7 +1,7 @@
 package dev.neigborstan.game.rpgquest.servlet;
 
 import dev.neigborstan.game.rpgquest.entity.User;
-import dev.neigborstan.game.rpgquest.repository.Repository;
+import dev.neigborstan.game.rpgquest.repository.UserRepo;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -15,13 +15,13 @@ import java.io.IOException;
 
 @WebServlet("/restart")
 public class RestartServlet extends HttpServlet {
-    private Repository repo = null;
+    UserRepo userRepo;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
         ServletContext servletContext = config.getServletContext();
-        repo = (Repository) servletContext.getAttribute("repository");
+        userRepo = (UserRepo) servletContext.getAttribute("userRepo");
     }
 
     @Override
@@ -35,8 +35,10 @@ public class RestartServlet extends HttpServlet {
 
         String userName = (String) session.getAttribute("userName");
 
-        User user = repo.getUserInit().getUserByName(userName);
-        repo.getUserInit().restartUser(user);
+        User user = userRepo.getUserByName(userName);
+        if (user != null){
+            userRepo.restartUser(user);
+        }
 
         getServletContext().getRequestDispatcher("/action").forward(req, resp);
     }

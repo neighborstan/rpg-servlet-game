@@ -4,7 +4,9 @@ import dev.neigborstan.game.rpgquest.entity.Answer;
 import dev.neigborstan.game.rpgquest.entity.Location;
 import dev.neigborstan.game.rpgquest.entity.Question;
 import dev.neigborstan.game.rpgquest.entity.User;
-import dev.neigborstan.game.rpgquest.repository.Repository;
+import dev.neigborstan.game.rpgquest.repository.AnswerRepo;
+import dev.neigborstan.game.rpgquest.repository.PersonRepo;
+import dev.neigborstan.game.rpgquest.repository.UserRepo;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -19,13 +21,17 @@ import java.util.List;
 
 @WebServlet("/person")
 public class DialogServlet extends HttpServlet {
-    private Repository repo = null;
+    UserRepo userRepo;
+    PersonRepo personRepo;
+    AnswerRepo answerRepo;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
         ServletContext servletContext = config.getServletContext();
-        repo = (Repository) servletContext.getAttribute("repository");
+        userRepo = (UserRepo) servletContext.getAttribute("userRepo");
+        personRepo = (PersonRepo) servletContext.getAttribute("personRepo");
+        answerRepo = (AnswerRepo) servletContext.getAttribute("answerRepo");
     }
 
     @Override
@@ -48,20 +54,20 @@ public class DialogServlet extends HttpServlet {
             personId = 0;
         }
 
-        Question question = repo.getPersonInit().getPersonById(personId).getStartQuestion();
+        Question question = personRepo.getById(personId).getStartQuestion();
 
         if (answerIdParam != null) {
-            question = repo.getAnswerInit().getAnswerById(Integer.parseInt(answerIdParam)).getNext();
+            question = answerRepo.getById(Integer.parseInt(answerIdParam)).getNext();
         }
 
         if (isDialogSuccess(question)) {
             String userName = (String) session.getAttribute("userName");
-            User user = repo.getUserInit().getUserByName(userName);
-            Location blockedLocation = repo.getPersonInit().getPersonById(personId).getKey().getLocation();
-            user.getLocationInit().getLocationById(blockedLocation.getId()).setBlock(false);
+            User user = userRepo.getUserByName(userName);
+            Location blockedLocation = personRepo.getById(personId).getKey().getLocation();
+            user.getLocationRepo().getLocationById(blockedLocation.getId()).setBlock(false);
         }
 
-        List<Answer> answers = repo.getAnswerInit().getAnswersByQuestionId(question.getId());
+        List<Answer> answers = answerRepo.getAnswersByQuestionId(question.getId());
         req.setAttribute("question", question);
         req.setAttribute("answers", answers);
 
