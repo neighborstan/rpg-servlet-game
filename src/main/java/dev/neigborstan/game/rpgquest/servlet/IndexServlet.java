@@ -19,7 +19,7 @@ public class IndexServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        UserRepo userRepo = (UserRepo) req.getServletContext().getAttribute("userRepo");
+        UserRepo userRepo = (UserRepo) getServletContext().getAttribute("userRepo");
         if (userRepo != null) {
             req.setAttribute("users", userRepo.getUsers());
         }

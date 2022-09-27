@@ -1,6 +1,7 @@
 package dev.neigborstan.game.rpgquest.repository;
 
 import dev.neigborstan.game.rpgquest.entity.User;
+import dev.neigborstan.game.rpgquest.init.LocationInit;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
@@ -29,17 +30,22 @@ class UserRepoTest {
 
     @Test
     void restartUser() {
+        User user = new User(1, "STUB", 1, new LocationRepo(new LocationInit()));
+        user.getLocationRepo().getLocationById(2).setBlock(false);
 
+        UserRepo userRepo = new UserRepo();
+        userRepo.restartUser(user);
 
+        assertTrue(user.getLocationRepo().getLocationById(2).isBlock());
     }
 
     @Test
     void deleteUser() {
-        UserRepo userRepo = new UserRepo();
         List<User> users = new ArrayList<>();
         IntStream.rangeClosed(1, 3)
                 .forEach(num -> users.add(new User(num, "name" + num, num, Mockito.mock(LocationRepo.class))));
 
+        UserRepo userRepo = new UserRepo();
         userRepo.getUsers().addAll(users);
 
         User name = users.get(1);
@@ -50,5 +56,14 @@ class UserRepoTest {
 
     @Test
     void getUserByName() {
+        String userName = "userName";
+        User expected = new User(1, userName, 1, Mockito.mock(LocationRepo.class));
+
+        UserRepo userRepo = new UserRepo();
+        userRepo.getUsers().add(expected);
+
+        User actual = userRepo.getUserByName(userName);
+
+        assertEquals(expected, actual);
     }
 }
