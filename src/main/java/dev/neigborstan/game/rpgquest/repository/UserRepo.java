@@ -27,9 +27,6 @@ public class UserRepo {
     }
 
     public User getUserByName(String name) {
-        if (name == null) {
-            throw new IllegalArgumentException();
-        }
         return users.stream()
                 .filter(user -> user.getName().equals(name))
                 .findFirst()

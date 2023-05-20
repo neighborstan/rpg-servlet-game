@@ -22,8 +22,8 @@ public class ActionServlet extends HttpServlet {
     private final int START_LOCATION_ID = 1;
     private final int END_LOCATION_ID = 14;
 
-    UserRepo userRepo;
-    PersonRepo personRepo;
+    private UserRepo userRepo;
+    private PersonRepo personRepo;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
