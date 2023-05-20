@@ -1,13 +1,13 @@
 package dev.neigborstan.game.rpgquest.init;
 
 import dev.neigborstan.game.rpgquest.entity.Location;
+import lombok.Getter;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class LocationInit {
-    private final Map<Integer, Location> locations = new HashMap<>();
+    @Getter
+    private final List<Location> locations = new ArrayList<>();
 
     public LocationInit() {
 
@@ -43,24 +43,20 @@ public class LocationInit {
         akosia.getLocationsForMovement().add(anolaria);
         krismaa.getLocationsForMovement().add(nolahmaa);
 
-        locations.put(1, chamoia);
-        locations.put(2, kunszalia);
-        locations.put(3, nyirmisia);
-        locations.put(4, freitileria);
-        locations.put(5, olbore);
-        locations.put(6, alfnirland);
-        locations.put(7, holunland);
-        locations.put(8, seiratelia);
-        locations.put(9, dagalhia);
-        locations.put(10, abrenus);
-        locations.put(11, thesia);
-        locations.put(12, anolaria);
-        locations.put(13, nolahmaa);
-        locations.put(14, akosia);
-        locations.put(15, krismaa);
-    }
-
-    public Location getLocationById(int locationId){
-        return locations.get(locationId);
+        locations.add(chamoia);
+        locations.add(kunszalia);
+        locations.add(nyirmisia);
+        locations.add(freitileria);
+        locations.add(olbore);
+        locations.add(alfnirland);
+        locations.add(holunland);
+        locations.add(seiratelia);
+        locations.add(dagalhia);
+        locations.add(abrenus);
+        locations.add(thesia);
+        locations.add(anolaria);
+        locations.add(nolahmaa);
+        locations.add(akosia);
+        locations.add(krismaa);
     }
 }

@@ -1,9 +1,10 @@
 package dev.neigborstan.game.rpgquest.servlet;
 
-import dev.neigborstan.game.rpgquest.repository.Repository;
+import dev.neigborstan.game.rpgquest.repository.PersonRepo;
 import dev.neigborstan.game.rpgquest.entity.Location;
 import dev.neigborstan.game.rpgquest.entity.Person;
 import dev.neigborstan.game.rpgquest.entity.User;
+import dev.neigborstan.game.rpgquest.repository.UserRepo;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -18,15 +19,18 @@ import java.util.List;
 
 @WebServlet("/action")
 public class ActionServlet extends HttpServlet {
-    private Repository repo = null;
     private final int START_LOCATION_ID = 1;
     private final int END_LOCATION_ID = 14;
+
+    UserRepo userRepo;
+    PersonRepo personRepo;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
         ServletContext servletContext = config.getServletContext();
-        repo = (Repository) servletContext.getAttribute("repository");
+        userRepo = (UserRepo) servletContext.getAttribute("userRepo");
+        personRepo = (PersonRepo) servletContext.getAttribute("personRepo");
     }
 
     @Override
@@ -47,17 +51,17 @@ public class ActionServlet extends HttpServlet {
             selectedLocationId = START_LOCATION_ID;
         }
 
-        User user = repo.getUserInit().getUserByName(userName);
+        User user = userRepo.getUserByName(userName);
         user.setCurrentLocationId(selectedLocationId);
 
-        Location location = user.getLocationInit().getLocationById(selectedLocationId);
+        Location location = user.getLocationRepo().getLocationById(selectedLocationId);
         List<Location> locationsForMovement = location.getLocationsForMovement();
 
         if (selectedLocationId == END_LOCATION_ID) {
             req.setAttribute("win", true);
         }
 
-        List<Person> personsOnLocation = repo.getPersonInit().getPersonsByLocationId(selectedLocationId);
+        List<Person> personsOnLocation = personRepo.getPersonsByLocationId(selectedLocationId);
         if (personsOnLocation.isEmpty()) {
             session.removeAttribute("personsOnLocation");
         } else {
